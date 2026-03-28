@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(find /c/Users/okkop/ki/buhlke/buhlke-website -type f -exec ls -lh {})",
+      "Bash(mkdir:*)"
+    ]
+  }
+}
