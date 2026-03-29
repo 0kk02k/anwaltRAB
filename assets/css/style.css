@@ -243,7 +243,8 @@ strong { color: var(--color-gray-900); }
 .hero-section::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0;
+    top: 0; bottom: 0;
+    left: 40%;
     width: 30%;
     background: linear-gradient(
         to right,
