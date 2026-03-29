@@ -692,7 +692,6 @@ footer .footer-top {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1rem;
 }
 
 footer .footer-brand {
@@ -706,28 +705,11 @@ footer .footer-brand {
 
 footer .footer-brand:hover { text-decoration: none; }
 
-footer .footer-nav {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    align-items: center;
-}
-
-footer .footer-nav a {
-    color: var(--color-gray-400);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 200ms ease-in-out;
-}
-
-footer .footer-nav a:hover { color: var(--color-secondary); }
-
 footer .footer-contact {
     color: var(--color-gray-500);
     font-size: 0.8rem;
     line-height: 1.6;
+    text-align: right;
 }
 
 footer .footer-contact a {
