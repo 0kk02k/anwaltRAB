@@ -15,19 +15,8 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="bg-cream" id="top">
-    <header class="sticky top-0 z-50" id="header">
-        <div class="container flex justify-between items-center" id="headerContainer">
-            <a href="#top" class="logo-link">KANZLEI BUHLKE</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#practice-areas">Rechtsgebiete</a>
-                <a href="#contact">Kontakt</a>
-            </nav>
-            <div class="md:hidden flex items-center justify-center cursor-pointer" style="width:2.5rem;height:2.5rem;" id="mobileMenuButton">
-                <i class="ri-menu-line" style="font-size:1.5rem;color:var(--color-white);"></i>
-            </div>
-        </div>
-    </header>
+<body class="bg-cream">
+    <div data-partial="header" style="min-height:60px;background-color:var(--color-gray-900);"></div>
 
     <!-- HERO -->
     <section class="hero-section reveal">
@@ -175,127 +164,10 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-top">
-                <a href="#top" class="footer-brand">KANZLEI BUHLKE</a>
-                <div class="footer-contact">
-                    Wundtstraße 40-44, 14057 Berlin &nbsp;|&nbsp;
-                    <a href="tel:+493028471022">+49 (0)30 / 28 47 10 22</a> &nbsp;|&nbsp;
-                    <a href="mailto:kanzlei@buhlke.de">kanzlei@buhlke.de</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="legal-links">
-                    <a href="impressum.html">Impressum</a>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div data-partial="footer"></div>
 
-    <div id="mobileNavOverlay" class="hidden" aria-hidden="true"></div>
-    <div id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
-        <div class="close-button-container">
-            <h2 id="mobileMenuTitle" class="sr-only">Menü</h2>
-            <button id="mobileMenuClose" aria-label="Menü schließen">
-                <i class="ri-close-line"></i>
-            </button>
-        </div>
-        <nav>
-            <a href="#practice-areas" class="mobile-link">Rechtsgebiete</a>
-            <a href="#contact" class="mobile-link">Kontakt</a>
-        </nav>
-    </div>
+    <div data-partial="mobile-menu"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
-            const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
-            const header = document.getElementById('header');
-            const googleMapsLink = document.getElementById('googleMapsLink');
-
-            function toggleMobileMenu() {
-                const isActive = mobileMenu.classList.contains('active');
-                mobileNavOverlay.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                mobileNavOverlay.setAttribute('aria-hidden', String(isActive));
-                document.body.style.overflow = !isActive ? 'hidden' : '';
-                if (!isActive) mobileMenuClose?.focus();
-                else mobileMenuButton?.focus();
-            }
-
-            if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu);
-            if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', toggleMobileMenu);
-            if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMobileMenu);
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (mobileMenu.classList.contains('active')) toggleMobileMenu();
-                    const targetId = link.getAttribute('href');
-                    setTimeout(() => scrollToTarget(targetId), 300);
-                });
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) toggleMobileMenu();
-            });
-
-            if (header) {
-                window.addEventListener('scroll', () => {
-                    header.classList.toggle('scrolled', window.pageYOffset > 50);
-                }, { passive: true });
-            }
-
-            function scrollToTarget(targetId) {
-                const el = document.querySelector(targetId);
-                if (el) {
-                    const offset = header ? header.offsetHeight : 0;
-                    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
-                }
-            }
-
-            document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href && href !== '#') { e.preventDefault(); scrollToTarget(href); }
-                });
-            });
-
-            if (googleMapsLink) {
-                googleMapsLink.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const url = this.getAttribute('data-url');
-                    if (url && confirm("Möchten Sie zu Google Maps weitergeleitet werden?")) {
-                        window.open(url, '_blank', 'noopener,noreferrer');
-                    }
-                });
-            }
-
-            // Aktuellen Tag hervorheben
-            try {
-                const today = new Date().getDay();
-                const item = document.querySelector(`.business-hours-list li[data-day="${today}"]`);
-                if (item) item.classList.add('current-day');
-            } catch (e) {}
-
-            // Scroll-Animationen
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-                    });
-                }, { threshold: 0.1 });
-                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-            } else {
-                document.querySelectorAll('.reveal').forEach(el => el.style.opacity = '1');
-            }
-        });
-    </script>
-
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>

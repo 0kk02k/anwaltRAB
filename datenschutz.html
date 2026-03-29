@@ -16,15 +16,7 @@
 </head>
 
 <body class="bg-cream">
-    <header id="header" class="sticky top-0 z-50">
-        <div class="container flex justify-between items-center" id="headerContainer" style="padding-top: 0.75rem; padding-bottom: 0.75rem;">
-            <a href="index.html" class="logo-link">KANZLEI BUHLKE</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="index.html#practice-areas">Rechtsgebiete</a>
-                <a href="index.html#contact">Kontakt</a>
-            </nav>
-        </div>
-    </header>
+    <div data-partial="header" style="min-height:60px;background-color:var(--color-gray-900);"></div>
 
     <main class="container py-20">
         <div class="main-content">
@@ -84,31 +76,10 @@ code>LICENSE</code>-Hinweis ist inklusive des Copyright-Vermerks im ursprunglich
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-top">
-                <a href="index.html" class="footer-brand">KANZLEI BUHLKE</a>
-                <ul class="footer-nav">
-                    <li><a href="index.html#practice-areas">Rechtsgebiete</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
-                    <li><a href="impressum.html">Impressum</a></li>
-                    <li><a href="datenschutz.html">Datenschutz</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                Wundtstraße 40-44, 14057 Berlin &nbsp;|&nbsp;
-                <a href="tel:+493028471022">+49 (0)30 / 28 47 10 22</a> &nbsp;|&nbsp;
-                <a href="mailto:kanzlei@buhlke.de">kanzlei@buhlke.de</a>
-            </div>
-            <div class="footer-bottom">
-                <div class="legal-links">
-                    <a href="impressum.html">Impressum</a>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div data-partial="footer"></div>
+    <div data-partial="mobile-menu"></div>
 
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
