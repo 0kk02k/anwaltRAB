@@ -244,13 +244,11 @@ strong { color: var(--color-gray-900); }
     content: '';
     position: absolute;
     top: 0; right: 0; bottom: 0;
-    width: 60%;
+    width: 30%;
     background: linear-gradient(
         to right,
         var(--color-gray-900) 0%,
-        rgba(17, 24, 39, 0.85) 30%,
-        rgba(17, 24, 39, 0.5) 60%,
-        rgba(17, 24, 39, 0.15) 85%,
+        rgba(17, 24, 39, 0.6) 40%,
         transparent 100%
     );
     z-index: 2;
