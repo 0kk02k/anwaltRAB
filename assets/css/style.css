@@ -921,35 +921,29 @@ footer .legal-links a:hover {
     html { scroll-behavior: auto; }
 }
 
-/* --- LANGUAGE TOGGLE --- */
-.lang-toggle {
-    align-items: center;
-    margin-left: 1.5rem;
-}
-
-.lang-toggle-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--color-gray-400);
-    font-size: 0.8rem;
-    font-weight: 600;
+/* --- LANGUAGE FLAG --- */
+.lang-flag {
+    position: absolute;
+    bottom: 0.15rem;
+    right: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1;
     text-decoration: none;
-    letter-spacing: 0.05em;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid var(--color-gray-700);
-    border-radius: var(--radius-md);
-    transition: all 200ms ease-in-out;
+    opacity: 0.6;
+    transition: opacity 200ms ease-in-out;
 }
 
-.lang-toggle-link:hover {
-    color: var(--color-secondary);
-    border-color: var(--color-secondary);
+.lang-flag:hover {
+    opacity: 1;
     text-decoration: none;
 }
 
-.lang-toggle-link i {
-    font-size: 0.95rem;
+@media (max-width: 767px) {
+    .lang-flag {
+        bottom: 0.25rem;
+        right: 3.5rem;
+        font-size: 1rem;
+    }
 }
 
 /* Mobile menu language link */
