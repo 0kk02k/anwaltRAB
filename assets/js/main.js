@@ -22,6 +22,10 @@
         return '../';
     }
 
+    function isEnglish() {
+        return window.location.pathname.indexOf('/en/') !== -1;
+    }
+
     // ── Interactions ────────────────────────────────────────────
     function initInteractions() {
         var mobileMenuButton = document.getElementById('mobileMenuButton');
@@ -51,6 +55,7 @@
 
         mobileLinks.forEach(function (link) {
             link.addEventListener('click', function (e) {
+                if (link.classList.contains('mobile-lang-link')) return;
                 e.preventDefault();
                 if (mobileMenu && mobileMenu.classList.contains('active')) toggleMobileMenu();
                 var targetId = link.getAttribute('href');
@@ -97,7 +102,10 @@
             googleMapsLink.addEventListener('click', function (e) {
                 e.preventDefault();
                 var url = this.getAttribute('data-url');
-                if (url && confirm('Möchten Sie zu Google Maps weitergeleitet werden?')) {
+                var confirmMsg = isEnglish()
+                    ? 'Would you like to be redirected to Google Maps?'
+                    : 'Möchten Sie zu Google Maps weitergeleitet werden?';
+                if (url && confirm(confirmMsg)) {
                     window.open(url, '_blank', 'noopener,noreferrer');
                 }
             });
@@ -123,11 +131,14 @@
 
     // ── Init ────────────────────────────────────────────────────
     async function init() {
-        var base = basePath();
+        var en = isEnglish();
+        var base = en ? './' : basePath();
+        var suffix = en ? '-en' : '';
+
         await Promise.all([
-            loadPartial(base + 'partials/header.html', '[data-partial="header"]'),
-            loadPartial(base + 'partials/footer.html', '[data-partial="footer"]'),
-            loadPartial(base + 'partials/mobile-menu.html', '[data-partial="mobile-menu"]')
+            loadPartial(base + 'partials/header' + suffix + '.html', '[data-partial="header' + suffix + '"]'),
+            loadPartial(base + 'partials/footer' + suffix + '.html', '[data-partial="footer' + suffix + '"]'),
+            loadPartial(base + 'partials/mobile-menu' + suffix + '.html', '[data-partial="mobile-menu' + suffix + '"]')
         ]);
         initInteractions();
     }
