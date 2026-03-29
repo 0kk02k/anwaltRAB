@@ -12,230 +12,15 @@
     <link rel="manifest" href="./assets/icons/site.webmanifest">
 
     <link href="./assets/fonts/remixicon.css" rel="stylesheet">
-
-    <style>
-        /* --- FONT FACE --- */
-        @font-face {
-            font-family: 'Cormorant Garamond';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('./assets/fonts/cormorant-garamond/cormorant-garamond-v16-latin-regular.woff2') format('woff2'),
-                 url('./assets/fonts/cormorant-garamond/cormorant-garamond-v16-latin-regular.woff') format('woff');
-        }
-
-        @font-face {
-            font-family: 'Cormorant Garamond';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url('./assets/fonts/cormorant-garamond/cormorant-garamond-v16-latin-700.woff2') format('woff2'),
-                 url('./assets/fonts/cormorant-garamond/cormorant-garamond-v16-latin-700.woff') format('woff');
-        }
-
-        /* Basis-Reset und Box-Sizing */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            line-height: 1.7;
-            -webkit-text-size-adjust: 100%;
-            tab-size: 4;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            color: #333;
-            background-color: #f9fafb;
-            scroll-padding-top: 90px;
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 100%;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 1280px;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Cormorant Garamond', Georgia, Cambria, "Times New Roman", Times, serif;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        h1 {
-            font-size: 2.75rem;
-            margin-bottom: 2rem;
-            color: var(--color-primary);
-            letter-spacing: 0.01em;
-        }
-
-        h2 {
-            font-size: 1.875rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
-
-        p,
-        li {
-            color: var(--color-gray-700);
-            margin-bottom: 1rem;
-        }
-
-        strong {
-            color: var(--color-gray-900);
-        }
-
-        @media (min-width: 768px) {
-            h2 {
-                font-size: 2.25rem;
-            }
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .main-content a {
-            color: var(--color-primary);
-            text-decoration: underline;
-        }
-
-        :root {
-            --color-primary: #1a365d;
-            --color-secondary: #c59d5f;
-            --color-gray-900: #111827;
-            --color-gray-800: #1f2937;
-            --color-gray-700: #374151;
-            --color-gray-600: #4b5563;
-            --color-gray-500: #6b7280;
-            --color-gray-400: #9ca3af;
-            --color-gray-300: #d1d5db;
-            --color-gray-100: #f3f4f6;
-            --color-gray-50: #f9fafb;
-            --color-white: #ffffff;
-            --color-black: #000000;
-        }
-
-        /* Hilfsklassen */
-        .py-20 {
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-        }
-
-        .space-x-8>*+* {
-            margin-left: 2rem;
-        }
-
-        /* --- HEADER --- */
-        #header {
-            background-color: var(--color-gray-900);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        #headerContainer {
-            display: flex;
-            align-items: center;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            justify-content: space-between;
-        }
-
-        #header .logo-link {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--color-secondary);
-            text-decoration: none;
-        }
-
-        #header .logo-link:hover {
-            text-decoration: none;
-        }
-
-        #header nav a {
-            font-weight: 500;
-            color: var(--color-white);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 150ms ease-in-out;
-        }
-
-        #header nav a:hover {
-            color: var(--color-gray-300);
-            text-decoration: none;
-        }
-
-        #mobileMenuButton {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            #main-nav {
-                display: none;
-            }
-
-            #mobileMenuButton {
-                display: flex;
-            }
-        }
-
-        /* --- Main Content --- */
-        .main-content {
-            background-color: var(--color-white);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            padding: 2rem 3rem;
-        }
-
-        /* --- FOOTER --- */
-        footer { background-color: var(--color-gray-900); color: var(--color-white); padding: 2.5rem 0 2rem; }
-        footer .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; }
-        footer .footer-brand { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: var(--color-secondary); text-decoration: none; letter-spacing: 0.04em; }
-        footer .footer-brand:hover { text-decoration: none; }
-        footer .footer-nav { display: flex; gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
-        footer .footer-nav a { color: var(--color-gray-400); text-decoration: none; font-size: 0.9rem; transition: color 200ms ease-in-out; }
-        footer .footer-nav a:hover { color: var(--color-secondary); }
-        footer .footer-contact { color: var(--color-gray-500); font-size: 0.85rem; line-height: 1.6; }
-        footer .footer-contact a { color: var(--color-gray-400); text-decoration: none; }
-        footer .footer-contact a:hover { color: var(--color-secondary); }
-        footer .footer-bottom { border-top: 1px solid var(--color-gray-800); padding-top: 1.5rem; display: flex; justify-content: center; align-items: center; text-align: center; }
-        footer .legal-links { display: flex; gap: 1.5rem; }
-        footer .legal-links a { color: var(--color-secondary); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: color 200ms ease-in-out; }
-        footer .legal-links a:hover { color: var(--color-white); text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="bg-gray-50">
-    <header id="header">
-        <div class="container" id="headerContainer">
+<body class="bg-cream">
+    <header id="header" class="sticky top-0 z-50">
+        <div class="container flex justify-between items-center" id="headerContainer" style="padding-top: 0.75rem; padding-bottom: 0.75rem;">
             <a href="index.html" class="logo-link">KANZLEI BUHLKE</a>
-            <nav id="main-nav" class="space-x-8">
+            <nav class="hidden md:flex space-x-8">
                 <a href="index.html#practice-areas">Rechtsgebiete</a>
-                <a href="index.html#downloads">Downloads</a>
                 <a href="index.html#contact">Kontakt</a>
             </nav>
         </div>
@@ -243,7 +28,7 @@
 
     <main class="container py-20">
         <div class="main-content">
-            <h1 claas="impressumueberschrift">Impressum</h1>
+            <h1>Impressum</h1>
             <p>Gemäß § 5 Telemediengesetz (TMG) und der Verordnung über Informationspflichten für Dienstleistungserbringer
                 (Dienstleistungsinformationspflichtenverordnung – DL-InfoV) informiere ich Sie wie folgt: Verantwortlicher dieser Webseite:
             </p>
@@ -303,25 +88,22 @@
                 <h2>Lizenzen & Urheberrechtliche Hinweise</h2>
                 <ul>
                     <li><strong>Tailwind CSS</strong> – ein Open-Source CSS-Framework unter der <abbr
-                            title="Massachusetts Institute of Technology">MIT-Lizenz</abbr>. Der vollstandige
-                        <code>LICENSE</code>-Hinweis ist inklusive des Copyright-Vermerks im ursprunglichen CSS enthalten
-                        :contentReference[oaicite:1]{index=1}.</li>
+                            title="Massachusetts Institute of Technology">MIT-Lizenz</abbr>. Der vollständige
+                        <code>LICENSE</code>-Hinweis ist inklusive des Copyright-Vermerks im ursprünglichen CSS enthalten.</li>
                     <li><strong>Tailwind UI / Tailwind Plus</strong> – kommerzielle Komponenten gemäß Tailwind Labs Lizenz
-                        (Personlich oder Team): erlaubt die Nutzung in beliebig vielen kommerziellen Projekten, nicht jedoch zum
-                        Weiterverkauf oder zur offentlichen Wiederverwendung von Vorlagen oder Komponenten
-                        :contentReference[oaicite:2]{index=2}.</li>
-                    <li><strong>Favicon (uber favicon.io mit Twemoji)</strong> – Emoji-Grafiken stammen aus Twemoji (Twitter Inc. &
+                        (persönlich oder Team): erlaubt die Nutzung in beliebig vielen kommerziellen Projekten, nicht jedoch zum
+                        Weiterverkauf oder zur öffentlichen Wiederverwendung von Vorlagen oder Komponenten.</li>
+                    <li><strong>Favicon (über favicon.io mit Twemoji)</strong> – Emoji-Grafiken stammen aus Twemoji (Twitter Inc. &
                         Mitwirkende), <abbr title="Creative Commons Namensnennung 4.0 International">CC-BY 4.0</abbr>. Eigene
-                        Bildrechte bleiben unberuhrt :contentReference[oaicite:3]{index=3}.</li>
+                        Bildrechte bleiben unberührt.</li>
                     <li><strong>Remix Icon</strong> – Open-Source Icon-Set unter der <abbr
                             title="Apache License Version 2.0">Apache 2.0 Lizenz</abbr>. Copyright- und Lizenzhinweise bleiben
-                        enthalten. Anderungen waren anzugeben, und eigenstandiger Verkauf ohne Lizenztext ist untersagt
-                        :contentReference[oaicite:4]{index=4}.</li>
+                        enthalten. Änderungen waren anzugeben, und eigenständiger Verkauf ohne Lizenztext ist untersagt.</li>
                 </ul>
-                <p>Die vollstandigen Lizenztexte (MIT, Apache 2.0, CC-BY 4.0) sind auf Folgeseiten hinterlegt oder liegen bei uns in
-                    der Dokumentation.</p>    </section>
-
-            </p></div>
+                <p>Die vollständigen Lizenztexte (MIT, Apache 2.0, CC-BY 4.0) sind auf Folgeseiten hinterlegt oder liegen bei uns in
+                    der Dokumentation.</p>
+            </section>
+        </div>
     </main>
 
     <footer>
