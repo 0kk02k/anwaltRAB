@@ -262,8 +262,8 @@ strong { color: var(--color-gray-900); }
 
 .hero-content {
     max-width: 36rem;
-    padding-top: 2rem;
-    padding-bottom: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
 }
 
 .hero-title {
