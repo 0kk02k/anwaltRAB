@@ -921,6 +921,9 @@ footer .legal-links a:hover {
     text-decoration: none;
     opacity: 0.6;
     transition: opacity 200ms ease-in-out;
+    z-index: 10;
+    display: inline-block;
+    padding: 0.25rem;
 }
 
 .lang-flag:hover {
@@ -931,7 +934,7 @@ footer .legal-links a:hover {
 @media (max-width: 767px) {
     .lang-flag {
         bottom: 0.25rem;
-        right: 3.5rem;
+        right: 4.5rem;
         font-size: 1rem;
     }
 }
