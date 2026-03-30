@@ -43,7 +43,7 @@
     --color-black: #000000;
     --color-red-600: #dc2626;
     --color-green-600: #16a34a;
-    --section-padding: 6rem;
+    --section-padding: 4.2rem;
     --container-max: 1280px;
     --radius-md: 8px;
     --radius-lg: 12px;
@@ -262,8 +262,8 @@ strong { color: var(--color-gray-900); }
 
 .hero-content {
     max-width: 36rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
 }
 
 .hero-title {
