@@ -224,19 +224,133 @@ Die Website soll von ihrem aktuell funktionalen, aber noch etwas "baukastenhafte
 
 ---
 
-## Abhaengigkeiten
+---
+
+## Phase 10: FAQ-Sektion (DE + EN)
+
+**Kontext:** FAQ.md definiert Inhalte, FAQ-IMPLEMENTATION.md beschreibt technischen Vorschlag.
+Beide wurden kritisch geprueft und angepasst an das bestehende Design-System.
+
+### Architekturentscheidungen (ULTRATHINK-Analyse)
+
+| Vorschlag aus FAQ-IMPLEMENTATION.md | Entscheidung | Begruendung |
+|---|---|---|
+| CTA-Block unter FAQ mit Kontaktdaten | **ENTFALLT** | Kontaktbereich (`#contact`) existiert bereits ausfuehrlich. Keine Duplikation. |
+| Reihenfolge: Downloads -> FAQ -> CTA -> Footer | **GEAENDERT** zu: Fachgebiete -> FAQ -> Kontakt -> Footer | FAQ als Orientierung VOR dem Kontakt-CTA. Kontakt wird zum natuerlichen Abschluss. |
+| Custom JS Accordion mit aria-Attributen | **Natives `<details>/<summary>`** | Barrierefreiheit out-of-the-box, kein JS noetig, semantisch korrekt, SEO-freundlich |
+| JSON-Datenstruktur + Komponentenarchitektur | **Statisches HTML** | Kein Framework, kein Build-System. 7 feste Fragen brauchen keine Abstraktionsschicht. |
+| H3 fuer Gruppenueberschriften | **Dezente Labels** (uppercase, gold, 0.75rem) | Bei 7 Fragen wirken H3 zu dominant. Labels untergeordnet. |
+| FAQ auf weissem Hintergrund | **Cream** (`var(--color-cream)`) | Visuelle Zaesur zwischen Fachgebieten (white) und Kontakt (white) |
+| Texte in dritter Person | **Ich-Form** | Gesamte Website nutzt persoenliche Ich-Form. Texte muessen angepasst werden. |
+
+### Sektionsreihenfolge (neu)
 
 ```
-Phase 0 (Bugfixes)          - unabhaengig, zuerst erledigen
-Phase 1 (CSS auslagern)     - Basis fuer alle folgenden
-Phase 2 (Typografie)        - nach Phase 1
-Phase 3 (Hero)              - nach Phase 2
-Phase 4 (Rechtsgebiete)     - nach Phase 2
-Phase 5 (Kontakt)           - nach Phase 2
-Phase 6 (Footer)            - nach Phase 2
-Phase 7 (Animationen)       - unabhaengig, parallel zu Phase 4-6
-Phase 8 (Impressum etc.)    - am Schluss
-Phase 9 (Finaler Check)     - nach Phase 8
+Hero -> Fachgebiete -> FAQ -> Kontakt -> Footer
+```
+
+### Aenderungen
+
+**A) CSS in style.css ergaenzen:**
+- `.faq-section` - Hintergrund cream, section-padding
+- `.faq-group` - Gruppen-Label (uppercase, gold, letter-spacing)
+- `.faq-item` - `<details>/<summary>` Styling
+- `.faq-item__question` (summary) - klickbare Zeile, font-weight 600, Remix Icon Plus/Minus
+- `.faq-item__answer` - Body-Typografie, line-height 1.8
+- Accordion-Animation: `grid-template-rows` Trick (CSS-only)
+- Trennlinien zwischen Items (1px solid var(--color-gray-200))
+- `prefers-reduced-motion`: keine Expand-Animation
+- Responsive: mobile-first, ausreichend Touch-Ziele
+
+**B) HTML in index.html:**
+- FAQ-Sektion zwischen Fachgebieten (`#practice-areas`) und Kontakt (`#contact`) einfuegen
+- 3 Gruppen mit 7 Fragen, native `<details>/<summary>`
+- Gruppen-Labels als `<span>` mit `.faq-group-label`
+- Kein CTA-Block
+
+**C) Inhalte in Ich-Form ueberarbeiten:**
+- Alle Antworten von dritter Person ("Die Kanzlei Buhlke...") in erste Person
+- Keine Selbstreferenz auf "die Website"
+- Interne Links auf #contact, PDF-Downloads etc.
+- Kurz, direkt, persoenlich
+
+**D) EN-Version:**
+- FAQ-Sektion in `en/index.html` einfuegen
+- Uebersetzte Fragen und Antworten
+- Label: "Frequently Asked Questions"
+
+**E) Navigation (optional):**
+- Pruefen ob "FAQ" Link in Desktop-/Mobile-Navigation sinnvoll ist
+- Scroll-Anker `#faq` auf der Sektion
+
+### Accordion-Technik
+
+```
+<details class="faq-item">
+  <summary class="faq-item__question">
+    <span>Frage-Text</span>
+    <i class="ri-add-line"></i>
+  </summary>
+  <div class="faq-item__answer">
+    <p>Antwort-Text</p>
+  </div>
+</details>
+```
+
+- CSS `grid-template-rows: 0fr` -> `1fr` fuer sanftes Oeffnen
+- `summary::-webkit-details-marker { display: none }` fuer sauberes Aussehen
+- Icon-Wechsel: CSS `details[open] .ri-add-line` -> `display:none`, `details[open] .ri-subtract-line` -> `display:block`
+
+### Abhaengigkeiten
+
+```
+Phase 10A (CSS)       - unabhaengig, zuerst
+Phase 10B (HTML DE)   - nach 10A
+Phase 10C (Texte)     - parallel zu 10B
+Phase 10D (HTML EN)   - nach 10B
+Phase 10E (Nav)       - nach 10D
+```
+
+### Komplexitaet: MITTEL
+- Kein neues JS, nur CSS-Animationen
+- Statisches HTML, keine Framework-Abhaengigkeit
+- ~80-120 Zeilen CSS, ~80 Zeilen HTML pro Sprache
+
+**ECC-Unterstuetzung:**
+| Skill/Agent | Einsatz | Warum |
+|---|---|---|
+| `code-reviewer` Agent | Nach HTML/CSS | Prueft Barrierefreiheit, Semantik, Konsistenz |
+| `/browser-qa` (Interaction Test) | Nach Umsetzung | Prueft Accordion-Verhalten Desktop + Mobile |
+| `/design-system` (Visual Audit) | Nach Umsetzung | Bewertet ob FAQ-Sektion zum restlichen Design passt |
+
+---
+
+## Phase 11: Finaler Abschluss & Deployment (ehemals Phase 9)
+
+**ECC-Unterstuetzung:**
+| Skill/Agent | Einsatz | Warum |
+|---|---|---|
+| `/benchmark` (Page Performance) | Final | Misst finale Core Web Vitals aller Seiten |
+| `/browser-qa` (Full Suite) | Final | Smoke Test + Interaction Test + Visual Regression |
+| `/canary-watch` | Nach Deployment | Ueberwacht deployed URL auf Regressionen |
+| `/e2e` | Nach Deployment | E2E-Tests fuer kritische User-Flows |
+
+---
+
+## Abhaengigkeiten (aktualisiert)
+
+```
+Phase 0  (Bugfixes)          - ERLEDIGT
+Phase 1  (CSS auslagern)     - ERLEDIGT
+Phase 2  (Typografie)        - ERLEDIGT
+Phase 3  (Hero)              - ERLEDIGT
+Phase 4  (Rechtsgebiete)     - ERLEDIGT
+Phase 5  (Kontakt)           - ERLEDIGT
+Phase 6  (Footer)            - ERLEDIGT
+Phase 7  (Animationen)       - ERLEDIGT
+Phase 8  (Impressum etc.)    - ERLEDIGT
+Phase 10 (FAQ-Sektion)       - ALS NAECHSTES
+Phase 11 (Finaler Check)     - nach Phase 10
 ```
 
 ## Risiken
@@ -244,6 +358,7 @@ Phase 9 (Finaler Check)     - nach Phase 8
 - **NIEDRIG:** Layout bricht auf Mobile - mitigiert durch schrittweise Aenderungen
 - **NIEDRIG:** CSS-Auslagerung bricht bestehende Seiten - mitigiert durch relative Pfade
 - **NIEDRIG:** Animationen auf aelteren Geraeten - `prefers-reduced-motion` Abdeckung
+- **NIEDRIG:** FAQ-Accordion auf sehr alten Browsern - `<details>` Fallback: Inhalt sofort sichtbar
 
 ## Geschaetzte Komplexitaet: MITTEL
 
@@ -261,7 +376,7 @@ Phase 9 (Finaler Check)     - nach Phase 8
 | Agent | Phasen | Aufgabe |
 |---|---|---|
 | `architect` | 1 | CSS-Architektur-Entscheidung vor Auslagerung |
-| `code-reviewer` | 0, 1, 6 | Code-Qualitaet nach Aenderungen |
+| `code-reviewer` | 0, 1, 6, 10 | Code-Qualitaet nach Aenderungen |
 | `security-reviewer` | 5 | Privacy-Patterns im Kontaktbereich |
 | `performance-optimizer` | 7 | Falls Animationen Performance-Probleme verursachen |
 
@@ -269,10 +384,10 @@ Phase 9 (Finaler Check)     - nach Phase 8
 
 | Skill | Phasen | Aufgabe |
 |---|---|---|
-| `/design-system` | 1, 2, 4, 9 | Design-Token Audit + Generierung, Typography/Spacing-Bewertung |
-| `/browser-qa` | 1, 3, 5, 7, 8, 9 | Visuelle Tests, Interaction Tests, Accessibility |
-| `/click-path-audit` | 4, 5, 6, 8 | User-Flow-Verifikation (Links, Downloads, Maps-Dialog) |
-| `/benchmark` | 2, 3, 7, 9 | Performance-Messung (Core Web Vitals: LCP, CLS, INP) |
+| `/design-system` | 1, 2, 4, 9, 10 | Design-Token Audit, Typography/Spacing-Bewertung |
+| `/browser-qa` | 1, 3, 5, 7, 8, 10, 11 | Visuelle Tests, Interaction Tests, Accessibility |
+| `/click-path-audit` | 4, 5, 6, 8 | User-Flow-Verifikation |
+| `/benchmark` | 2, 3, 7, 11 | Performance-Messung (Core Web Vitals) |
 | `/verify` | 0, 8 | HTML-Validitaet, Link-Integritaet |
-| `/canary-watch` | 9 | Post-Deploy Monitoring auf Regressionen |
-| `/e2e` | 9 | Automatisierte E2E-Tests fuer kritische User-Flows |
+| `/canary-watch` | 11 | Post-Deploy Monitoring |
+| `/e2e` | 11 | E2E-Tests fuer kritische User-Flows |
