@@ -204,11 +204,12 @@ strong { color: var(--color-gray-900); }
 #header .logo-link:hover { text-decoration: none; }
 
 #header nav a {
+    font-family: var(--font-serif);
     font-weight: 400;
     color: var(--color-white);
     text-decoration: none;
-    font-size: 1rem;
-    letter-spacing: 0.03em;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
     transition: color 200ms ease-in-out;
 }
 
@@ -587,23 +588,16 @@ strong { color: var(--color-gray-900); }
     text-decoration: underline;
 }
 
-/* Downloads Row: 3-column grid */
+/* Downloads Row: grid */
 .downloads-row {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--color-gray-200);
-}
-
-.card-frame > .downloads-row {
-    padding-top: 0;
-    border-top: none;
 }
 
 @media (min-width: 768px) {
     .downloads-row {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
     }
 }
@@ -826,9 +820,12 @@ footer .legal-links a:hover {
 #mobileMenu nav { display: flex; flex-direction: column; }
 #mobileMenu nav a + a { margin-top: 1rem; }
 #mobileMenu nav a {
-    font-weight: 500;
+    font-family: var(--font-serif);
+    font-weight: 400;
     color: var(--color-gray-800);
     text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
     transition: color 150ms ease-in-out;
 }
 
